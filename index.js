@@ -42,7 +42,7 @@ app.get("/api/customers/:id", (req, res) => {
 app.post("/api/customers", (req, res) => {
   const { error } = req.body;
   if (error) {
-    res.status(400).send(error.details[0].message);
+    res.status(400).send({ message: "Ooops... something went wrong!" });
     return;
   }
   //Increment the customer id
@@ -51,6 +51,40 @@ app.post("/api/customers", (req, res) => {
     title: req.body.title,
   };
   customers.push(customer);
+  res.send(customer);
+});
+
+//Update Request Handler
+// Update Existing Customer Information
+app.put("/api/customers/:id", (req, res) => {
+  const customer = customers.find((c) => c.id === parseInt(req.params.id));
+  if (!customer)
+    res
+      .status(404)
+      .send({ message: "Ooops... Cant find what you are looking for!" });
+
+  const { error } = req.body;
+  if (error) {
+    res.status(400).send({ message: "Ooops... something went wrong!" });
+    return;
+  }
+
+  customer.title = req.body.title;
+  res.send(customer);
+});
+
+//Delete Request Handler
+// Delete Customer Details
+app.delete("/api/customers/:id", (req, res) => {
+  const customer = customers.find((c) => c.id === parseInt(req.params.id));
+  if (!customer)
+    res
+      .status(404)
+      .send({ message: "Ooops... Cant find what you are looking for!" });
+
+  const index = customers.indexOf(customer);
+  customers.splice(index, 1);
+
   res.send(customer);
 });
 //PORT ENVIRONMENT VARIABLE
