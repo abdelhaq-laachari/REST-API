@@ -37,6 +37,22 @@ app.get("/api/customers/:id", (req, res) => {
   res.send(customer);
 });
 
+//CREATE Request Handler
+//CREATE New Customer Information
+app.post("/api/customers", (req, res) => {
+  const { error } = req.body;
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+  //Increment the customer id
+  const customer = {
+    id: customers.length + 1,
+    title: req.body.title,
+  };
+  customers.push(customer);
+  res.send(customer);
+});
 //PORT ENVIRONMENT VARIABLE
 const port = 6000;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
