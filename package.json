@@ -1,0 +1,16 @@
+{
+  "name": "rest-api",
+  "version": "0.0.1",
+  "description": "example of how to create a rest api with node js and express js",
+  "main": "index.js",
+  "repository": "https://github.com/abdelhaq-laachari/REST-API.git",
+  "scripts": {
+    "test": "start"
+  },
+  "keywords": [
+    "Rest",
+    "api"
+  ],
+  "author": "Godfather",
+  "license": "MIT"
+}
